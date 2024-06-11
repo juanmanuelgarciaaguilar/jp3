@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora</title>
+<link rel="stylesheet" href="Cal.css">
+<style>
+    body {
+        background-image: url('fondo.jpg'); /* Ruta de la imagen de fondo */
+        background-size: cover;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    .calculator {
+        width: 300px; /* Ancho de la calculadora */
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Sombra */
+    }
+    .screen {
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 10px;
+        font-size: 24px;
+    }
+    .buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 5px;
+    }
+    button {
+        padding: 20px;
+        font-size: 20px;
+        cursor: pointer;
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+    button:hover {
+        background-color: #ddd;
+    }
+    button:active {
+        background-color: #bfbfbf;
+    }
+</style>
+</head>
+<body>
+
+<div class="calculator">
+  <!-- Pantalla de la calculadora -->
+  <input type="text" class="screen" id="screen" readonly>
+  <!-- Botones de la calculadora -->
+  <div class="buttons">
+    <button onclick="clearScreen()">C</button>
+    <button onclick="appendInput('/')">/</button>
+    <button onclick="appendInput('*')">*</button>
+    <button onclick="appendInput('7')">7</button>
+    <button onclick="appendInput('8')">8</button>
+    <button onclick="appendInput('9')">9</button>
+    <button onclick="appendInput('-')">-</button>
+    <button onclick="appendInput('4')">4</button>
+    <button onclick="appendInput('5')">5</button>
+    <button onclick="appendInput('6')">6</button>
+    <button onclick="appendInput('+')">+</button>
+    <button onclick="appendInput('1')">1</button>
+    <button onclick="appendInput('2')">2</button>
+    <button onclick="appendInput('3')">3</button>
+    <button onclick="calculate()">=</button>
+    <button onclick="appendInput('0')">0</button>
+    <button onclick="appendInput('.')">.</button>
+  </div>
+</div>
+
+<script>
+// Variable para almacenar la expresión de la calculadora
+let expression = '';
+
+// Función para agregar números y operadores a la expresión
+function appendInput(value) {
+  expression += value;
+  document.getElementById('screen').value = expression;
+}
+
+// Función para borrar la pantalla de la calculadora
+function clearScreen() {
+  expression = '';
+  document.getElementById('screen').value = expression;
+}
+
+// Función para calcular el resultado de la expresión
+function calculate() {
+  try {
+    expression = eval(expression); // Evalúa la expresión y calcula el resultado
+    document.getElementById('screen').value = expression;
+  } catch (error) {
+    document.getElementById('screen').value = 'Error'; // Maneja los errores, como división por cero
+  }
+}
+</script>
+
+</body>
+</html>
